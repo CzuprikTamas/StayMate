@@ -1,19 +1,147 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Szálloda hozzáadása</title>
+    <meta charset="UTF-8">
+    <title>New Facilities</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
 </head>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-image: url('https://wallpapercave.com/wp/wp8717927.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: #fff;
+        margin: 0;
+    }
+
+    .navbar {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .navbar-brand,
+    .btn-link {
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .navbar-brand:hover,
+    .btn-link:hover {
+        color: #ffcc00;
+    }
+
+    .container {
+        margin-top: 20px;
+    }
+
+    form {
+        margin-top: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: black;
+
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+    table {
+        border-collapse: collapse;
+        margin-top: 20px;
+        border: 1px solid #fff; /* White border */
+        width: 100%;
+    }
+
+    .table th,
+    .table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #fff; /* White bottom border */
+        color: #000; /* Black text */
+    }
+
+    .table th {
+        background-color: #343a40;
+        color: #fff;
+    }
+
+    .table tbody tr:nth-of-type(odd) {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-link {
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .btn-link:hover {
+        color: #ffcc00;
+    }
+
+    .btn-logout {
+        color: #000;
+    }
+
+    .btn-logout:hover {
+        color: #333;
+    }
+
+    .box-footer {
+        margin-top: 20px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card h1 {
+        color: #333;
+    }
+
+    .card-body {
+        padding: 0;
+    }
+</style>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
     <a class="navbar-brand" href="#">StayMate</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" th:href="@{/home.html}">Home <span class="sr-only">(current)</span></a>
             </li>
@@ -68,30 +196,60 @@
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/new-bar-form.html}">Add bar</a>
             </li>
-
-
         </ul>
     </div>
 </nav>
-<h1>Add new services</h1>
-<form th:action="@{'/services/create/' + ${hotelId}}" method="post">
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1 class="text-center"> New Services </h1>
+            <div class="card-body">
+                <form th:action="@{'/services/create/' + ${hotelId}}" method="post">
+                    <div class="form-group">
+                        <label> Name </label>
+                        <input
+                                type="text"
+                                name="name"
+                                th:field="*{new_facilities.name}"
+                                class="form-control"
+                                placeholder="Service name"
+                        />
+                    </div>
 
-    <label for="name">Name</label>
-    <input type="text" id="name" placeholder="Name:" th:field="*{new_facilities.name}">
+                    <div class="form-group">
+                        <label> Description </label>
+                        <input
+                                type="text"
+                                name="description"
+                                th:field="*{new_facilities.description}"
+                                class="form-control"
+                                placeholder="Description"
+                        />
+                    </div>
 
-    <label for="description">Description</label>
-    <input type="text" id="description" placeholder="Description:" th:field="*{new_facilities.description}">
+                    <div class="form-group">
+                        <label> Price </label>
+                        <input
+                                type="text"
+                                name="price"
+                                th:field="*{new_facilities.price}"
+                                class="form-control"
+                                placeholder="Price"
+                        />
+                    </div>
 
-    <label for="price">Price</label>
-    <input type="number" id="price" placeholder="Price:" th:field="*{new_facilities.price}">
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">
+                            Ready
+                        </button>
+                    </div>
+                </form>
 
-    <button type="submit" class="btn btn-primary">Add Service</button>
-    <br>
-</form>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
